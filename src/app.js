@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Container from './components/Container';
+
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
-ReactDOM.render(<p> Boilerplate Project </p>, document.getElementById('app'));
+ReactDOM.render(<Container />, document.getElementById('app'));
