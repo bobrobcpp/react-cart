@@ -1,24 +1,58 @@
 import React from 'react';
-import Item from './Item';
+
+import ItemList from './ItemList';
+import TotalBox from './TotalBox';
+
 export default class Container extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   products: [
-    //   {name: 'Mountain Dew', count: 0, price: 2.95},
-    //   {name: 'Desperados', count: 0, price: 4.35},
-    //   {name: 'Jack Daniels', count: 0, price: 10.34}
-    //   ]
-    // };
+    this.state = {
+      products: [
+        { name: 'Mountain Dew', count: 0, price: 2.95 },
+        { name: 'Desperados', count: 0, price: 4.35 },
+        { name: 'Jack Daniels', count: 0, price: 10.34 }
+      ],
+      totalPrice: 0
+    };
   }
 
-  calcTotal = () => {};
+  incrementCount = option => {
+    let tempOption = option;
+    tempOption.count += 1;
+    let tempProducts = this.state.products;
+
+    tempProducts.find((o, i) => {
+      if (o.name === tempOption.name) {
+        tempProducts[i] = tempOption;
+        return true; // stop searching
+      }
+    });
+
+    this.setState(prevState => {
+      return {
+        products: tempProducts
+      };
+    });
+    this.calcTotal();
+  };
+
+  calcTotal = () => {
+    let total = 0;
+    this.state.products.forEach(product => {
+      total += product.count * product.price;
+    });
+    this.setState(() => {
+      return {
+        totalPrice: total
+      };
+    });
+  };
+
   render() {
     return (
       <div className="container">
-        <Item name={'Mountain Poo'} count={0} price={2.95} />
-        <Item name={'Pesterdaos'} count={0} price={2.95} />
-        <Item name={'Lack Flaniels'} count={0} price={2.95} />
+        <ItemList products={this.state.products} incrementCount={this.incrementCount} />
+        <TotalBox totalPrice={this.state.totalPrice} />
       </div>
     );
   }

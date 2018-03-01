@@ -1,33 +1,18 @@
 import React from 'react';
 
-export default class Item extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: this.props.name,
-      count: this.props.count,
-      price: this.props.price
-    };
-    // this.handleClick = this.handleClick.bind(this);
-  }
+const Item = props => (
+  <div className="item">
+    <div>{props.product.name}</div>
+    <div
+      className="counter"
+      onClick={e => {
+        props.incrementCount(props.itemText);
+      }}
+    >
+      {props.product.count}
+    </div>
+    <div>${props.product.price}</div>
+  </div>
+);
 
-  handleClick = () => {
-    this.setState(prevState => {
-      return {
-        count: prevState.count + 1
-      };
-    });
-  };
-
-  render() {
-    return (
-      <div className="item">
-        <div>{this.state.name}</div>
-        <div className={'counter'} onClick={this.handleClick}>
-          {this.state.count}
-        </div>
-        <div>{this.state.price}</div>
-      </div>
-    );
-  }
-}
+export default Item;
