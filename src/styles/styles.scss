@@ -3,6 +3,7 @@
 
 body {
   background: #e9e7e5;
+  box-sizing: border-box;
 }
 
 .container {
@@ -17,9 +18,24 @@ body {
   height: 50px;
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+}
+
+.item-cell {
+  padding-left: 5%;
+  width: 33.3%;
 }
 
 div.counter:hover {
   cursor: pointer;
+}
+
+div.counter {
+  text-align: center;
+}
+
+.item-cell + button {
+  width: 20px;
+  padding: 0;
+  margin: 0% 15% 0% 5%;
 }

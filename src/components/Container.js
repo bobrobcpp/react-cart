@@ -48,6 +48,11 @@ export default class Container extends React.Component {
     });
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevProps);
+    console.log(prevState);
+  }
+
   render() {
     return (
       <div className="container">
